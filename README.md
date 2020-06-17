@@ -1,5 +1,5 @@
-# Docker for Web Development
+# Docker for Web Developers example code
 
-Example code from the book and course *"Docker for Web Development"*.
+Example code from the *"Docker for Web Developers"* book and course available at <https://DockerWebDev.com/>
 
-Each example is contained in a folder named after its associated chapter.
+Refer to each `README.md` file for launch instructions.

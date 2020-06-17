@@ -1,0 +1,45 @@
+#answers {
+  display: grid;
+  width: 90%;
+  gap: 0.8em;
+  margin: 0 auto;
+}
+
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  font-size: 1.2em;
+  padding: 0.4em 1.5em;
+  color: var(--color-dark);
+  background: var(--color-btn) none 100% 50% no-repeat;
+  border: 0.2em solid var(--color-back);
+  border-radius: 0.6em;
+  cursor: pointer;
+  outline: 0 none;
+  transition: all 0.3s linear;
+}
+
+button.reveal {
+  transition-delay: 1s;
+}
+
+button:not(.wrong):hover {
+  border-color: var(--color-fore);
+}
+
+button.right {
+  color: var(--color-lite);
+  background-color: var(--color-fore);
+}
+
+button.right:not(.reveal) {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg>');
+}
+
+button.wrong {
+  color: var(--color-lite);
+  background-color: var(--color-hint);
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M18 6L6 18M6 6l12 12"/></svg>');
+}

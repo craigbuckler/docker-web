@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysecret
+    volumes:
+      - mysqldata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - mysqlnet
+    restart: on-failure
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    networks:
+      - mysqlnet
+    restart: on-failure
+
+volumes:
+  mysqldata:
+
+networks:
+  mysqlnet:

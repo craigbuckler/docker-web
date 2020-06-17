@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+
+  mongodb:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=quizuser
+      - MONGO_INITDB_ROOT_PASSWORD=quizpass
+    image: mongo:latest
+    container_name: mongodb
+    volumes:
+      - quizdata:/data/db
+    networks:
+      - quiznet
+    ports:
+      - "27017"
+    restart: on-failure
+    logging:
+      driver: "none"
+
+  nodejs:
+    build:
+      context: ./nodejs
+      dockerfile: nodejs.Dockerfile
+    container_name: nodejs
+    depends_on:
+      - mongodb
+    networks:
+      - quiznet
+    ports:
+      - "8000"
+    restart: on-failure
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: nginx.Dockerfile
+    container_name: nginx
+    depends_on:
+      - nodejs
+    networks:
+      - quiznet
+    ports:
+      - "8080:80"
+    restart: on-failure
+    logging:
+      driver: "none"
+
+volumes:
+  quizdata:
+
+networks:
+  quiznet:

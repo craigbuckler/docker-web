@@ -1,0 +1,16 @@
+#status {
+  display: grid;
+  grid-template-columns: repeat(6, auto);
+  gap: 0.5em;
+  margin: 1em 0;
+}
+
+#status p {
+  text-align: right;
+  margin: 0;
+}
+
+#status output {
+  font-weight: bold;
+  margin: 0;
+}

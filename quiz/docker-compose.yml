@@ -1,0 +1,61 @@
+version: '3'
+
+services:
+
+  mongodb:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=quizuser
+      - MONGO_INITDB_ROOT_PASSWORD=quizpass
+    image: mongo:latest
+    container_name: mongodb
+    volumes:
+      - quizdata:/data/db
+    networks:
+      - quiznet
+    ports:
+      - "27017:27017"
+    logging:
+      driver: "none"
+
+  nodejs:
+    environment:
+      - NODE_ENV=development
+    build:
+      context: ./nodejs
+      dockerfile: nodejs.Dockerfile
+    container_name: nodejs
+    depends_on:
+      - mongodb
+    volumes:
+      - ./nodejs:/home/node/app
+      - nodejsfiles:/home/node/app/static
+      - nodejsfiles:/home/node/app/.config
+      - nodejsfiles:/home/node/app/.npm
+      - nodejsfiles:/home/node/app/node_modules
+    networks:
+      - quiznet
+    ports:
+      - "8000:8000"
+      - "9229:9229"
+    command: /bin/sh -c 'npm i && npm run debug'
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: nginx.Dockerfile
+    container_name: nginx
+    depends_on:
+      - nodejs
+    networks:
+      - quiznet
+    ports:
+      - "8080:80"
+    logging:
+      driver: "none"
+
+volumes:
+  quizdata:
+  nodejsfiles:
+
+networks:
+  quiznet:
