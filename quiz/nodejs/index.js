@@ -43,5 +43,5 @@ app.get('/question', async (req, res) => {
 
 // start HTTP server
 app.listen(port, () =>
-  console.log(`page hit web service running on port ${port}`)
+  console.log(`quiz app running on port ${port}`)
 );
