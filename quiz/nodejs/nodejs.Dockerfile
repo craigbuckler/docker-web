@@ -1,5 +1,5 @@
 # base Node.js LTS image
-FROM node:lts-alpine
+FROM node:14-alpine
 
 # environment variables
 ENV NODE_ENV=production
