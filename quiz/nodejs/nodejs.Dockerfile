@@ -1,4 +1,4 @@
-# base Node.js LTS image
+# base Node.js v14 image
 FROM node:14-alpine
 
 # environment variables
