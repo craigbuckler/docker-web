@@ -3,6 +3,11 @@ import { terser } from 'rollup-plugin-terser';
 
 export default {
   input: './src/js/main.js',
+  watch: {
+    chokidar: {
+      usePolling: true
+    }
+  },
   output: {
     file: './static/js/main.js',
     format: 'es',
